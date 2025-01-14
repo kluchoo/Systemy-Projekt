@@ -9,72 +9,70 @@
 \newpage
 \section{Założenia projektowe – wymagania}		%1
 
-% * SPOSOBY UZYWANIA MAKRA HERE * # 
-% ? Listingi
-% Parametr #1: Opis listingu (wyświetla sie bezpośrednio pod listingiem)
-% Parametr #2 : Nazwa pliku oraz ID do oznaczania (wazne, zeby byl w katalogu kod oraz jego rozszerzenie to txt) 
+\subsection{Wprowadzenie}
+Projekt zakłada stworzenie kompleksowej infrastruktury sieciowej dla przedsiębiorstwa, obejmującej wdrożenie domeny Active Directory, usług katalogowych oraz systemów wsparcia pracy grupowej.
 
-\ListingFile{OpisPromptu}{prompt}
+\subsection{Struktura organizacyjna}
+Przedsiębiorstwo składa się z następujących wydziałów:
+\begin{itemize}
+    \item Wydział Informatyczny (administracja systemem)
+    \item Kadry
+    \item Płace
+    \item Marketing
+    \item Wydział Gospodarczy
+\end{itemize}
 
-Tak wstawiamy listingi, za pomocą:
+\subsection{Wymagania infrastrukturalne}
+\begin{enumerate}
+    \item \textbf{Domena Active Directory:}
+    \begin{itemize}
+        \item Nazwa domeny: firma.ad
+        \item Schemat nazewnictwa kont: imie.nazwisko
+        \item Automatyzacja tworzenia kont poprzez skrypty
+    \end{itemize}
 
-  \begin{verbatim}
-	ListingFile\{Opis listingu}{nazwa-pliku} 
- \end{verbatim}
-	
-	wstawiamy listingi z plików z katalogu kod.
+    \item \textbf{Struktura grupowa:}
+    \begin{itemize}
+        \item Grupy globalne dla każdego wydziału
+        \item Specjalne uprawnienia dla wydziału informatycznego
+    \end{itemize}
 
-Gdzie:
-\begin{verbatim}
-	{Opis listingu} - opis listingu wyświetlany pod listingiem
-	{nazwa-pliku} - nazwa pliku z katalogu kod i jednocześnie ID do oznaczania
-\end{verbatim}
+    \item \textbf{Zasoby sieciowe:}
+    \begin{itemize}
+        \item Zasób wspólny dostępny dla wszystkich pracowników
+        \item Zasoby wydziałowe dla poszczególnych działów
+        \item Klaster wysokiej dostępności
+        \item Macierz RAID-1 (30GB) udostępniana przez iSCSI
+    \end{itemize}
 
-Tak oznaczamy listingi \OznaczKod{prompt} w tekście.\\Za pomocą:
+    \item \textbf{Infrastruktura serwerowa:}
+    \begin{itemize}
+        \item Serwer SMPXX.firma.ad (iSCSI Target)
+        \item Serwer SPRXX-firma.ad (serwer wydruków)
+        \item Klaster DHCP
+        \item Serwer WWW (IIS + WordPress)
+    \end{itemize}
 
-\begin{verbatim}
-	ListingFile\{Opis listingu}{nazwa-pliku} 
-\end{verbatim}
+    \item \textbf{Stacje robocze:}
+    \begin{itemize}
+        \item Automatyczna instalacja z obrazu
+        \item Automatyczna konfiguracja przez GPO
+        \item Mapowanie dysków sieciowych
+    \end{itemize}
+\end{enumerate}
 
-gdzie:
+\subsection{Szczegółowe wymagania techniczne}
+\begin{enumerate}
+    \item \textbf{System drukowania:}
+    \begin{itemize}
+        \item Centralny serwer wydruków
+        \item Dostęp do drukarek przez \\ SPRXX-firma.ad/nazwa-drukarki
+    \end{itemize}
 
-\begin{verbatim}
-	{nazwa-pliku} - nazwa pliku z katalogu kod i jednocześnie ID do oznaczania
-\end{verbatim}
-
-
-
-\clearpage
-% ? Zdjęcia
-% OPCJONALNY Parametr #1: Szerokość zdjęcia (domyślnie jest to szerokość paragrafu ale jak sie poda w [#1] to wtedy zmienia się na podaną wartość)
-% Parametr #2: Nazwa pliku z rozszerzeniem (podajemy katalog w którym jest plik i jego rozszerzenie np. rys/nazwa-rysunku.png)
-% Parametr #3: Opis tego co jest na rysunku (wyświetla sie bezpośrednio pod rysunkiem) 
-% Parametr #4: Identyfikator rysunku (do oznaczania zdjęć w tekście) 
-
-\fg{rys/nazwa-rysunku.png}{Opis tego co jest na rysunku}{id-rysunku}
-
-jest równe 
-\fg[\textwidth]{rys/nazwa-rysunku.png}{Opis tego co jest na rysunku}{id-rysunku}
-\clearpage
-Tak wstawiamy zdjęcia, za pomocą:
-
-  \begin{verbatim}
-	\fg{szerokość-rysunku}{nazwa-pliku}{Opis rysunku}{id-rysunku} 
- \end{verbatim}
-
- Gdzie:
-\begin{verbatim}
-	{szerokość-rysunku} - szerokość rysunku domyślnie \textwidth
-	{nazwa-pliku} - nazwa pliku z katalogu rys i jego rozszerzenie
-	{Opis rysunku} - opis rysunku wyświetlany pod rysunkiem
-	{id-rysunku} - identyfikator rysunku
-\end{verbatim}
-
- Tak oznaczamy zdjęcia \OznaczZdjecie{id-rysunku} w tekście. Za pomocą:
-
-  \begin{verbatim}
-	\OznaczZdjecie{id-rysunku}
-	\end{verbatim}
-
-
-
+    \item \textbf{Usługi sieciowe:}
+    \begin{itemize}
+        \item DHCP w konfiguracji klastrowej
+        \item Strona WWW pod adresem www.firma.ad
+        \item WordPress zintegrowany z IIS
+    \end{itemize}
+\end{enumerate}
